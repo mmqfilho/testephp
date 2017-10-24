@@ -1,0 +1,45 @@
+Requisitos técnicos:
+
+Elaborar um carrinho de compras simples em PHP / Mysql
+OK - lista de categorias
+ - lista de produtos
+ - busca
+ - detalhe
+ - carrinho
+ - criação do pedido
+ - lista de pedidos 
+
+ 
+
+Requisitos funcionais :
+
+Os produtos devem estar em um banco de dados relacional nos quais devem ser exibidos na lista;
+
+Os produtos devem possuir os seguintes atributos : 
+ - nome
+ - descriçao
+ - imagem
+ - preço
+ - categoria (um produto pode estar em mais de uma categoria)
+ - caracteristicas (devem ser pré-definidas e associadas ao produto)
+
+Não é necessário criar um layout elaborado;
+O carrinho deve ser mantido mesmo se o usuário navegar em outra pagina (nova busca / listagem / ou detalhe do produto );
+O pedido deve ser salvo no banco de dados contemplando todos os itens do carrinho e os dados do usuario ( Pessoais e de entrega );
+Não é necessário integração de nenhuma forma de pagamento, apenas gerar o registro do pedido no banco de dados;
+
+
+Entrega :
+
+O código do projeto deve ser colocado no github ou bitbucket do candidato e deve ser enviado apenas o link publico do projeto 
+(Código php, Bibliotecas, Estrutura do banco de dados - com dados para teste ) até dia 30/10, às 18h;
+
+ 
+Outras tecnologias consideradas (Para classificação apenas - a falta do uso não desqualifica o candidato) :
+OK- KeValueDB (Redis/Memcache);
+- Motores de pesquisa (Solr/Sphinx/ElasticSearch/etc); 
+- Queue (RabbitMQ / ApacheMQ / Gearman);
+- Testes Unitários ;
+- Front End : 
+  - Angular
+OK- Bootstrap;
