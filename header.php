@@ -20,7 +20,7 @@
 		<div class="container-fluid">
 			<header class="row">
 				<div class="col-md-2">
-					<!-- <img alt="teste php mobly" src="images/logo-mobly4.svg" width="120"> -->
+					<!-- <img alt="teste php mobly" src="images/logo-mobly4.svg" width="120">  -->
 				</div>
        			<div class="col-md-6">
        				<form method="GET" action="/" id="frmBuscar" name="frmBuscar" >

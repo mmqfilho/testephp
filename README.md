@@ -37,7 +37,7 @@ services apache2 reload
 
 # Banco de dados
 Importar o arquivo instalacao/database.sql no banco testephp
-Alterar dados de acesso ao banco no arquivo config.php
+Alterar dados de acesso ao banco no arquivo 'config.php'
 
 # Memcached
 Instalar e habilitar o memcached
@@ -47,3 +47,9 @@ apt-get install php5-memcached
 service apache2 restart
 '''
 
+O cache pode ser habilitado ou desabilitado via arquivo de configuracao 'config.php' e também ajustado o tempo de expiração em segundos.
+
+Para apagar o cache via browser utilize:
+'''
+http://testephp.local/?g=limparcache
+'''
