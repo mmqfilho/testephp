@@ -15,7 +15,7 @@ define('DB_USERNAME', 	'root');
 define('DB_PASSWORD', 	'advance');
 
 // memcached
-define('MEMCACHED',				true);
+define('MEMCACHED',				false);
 define('MEMCACHED_EXPIRATION',	time() + 600); // 10 minutos
 
 // deixado no fim do arquivo propositalmente

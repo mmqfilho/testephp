@@ -1,11 +1,16 @@
 <?php 
 // pega os produtos
-$produtos = $md->getProdutos(isset($_REQUEST['o'])?$_REQUEST['o']:null, (isset($_REQUEST['cat'])?$_REQUEST['cat']:null));
+$produtos = $md->getProdutos(
+		(isset($_GET['o']))  	?$_GET['o']:null, 		// ordenacao
+		(isset($_GET['cat']))	?$_GET['cat']:null,		// categoria
+		(isset($_GET['p']))		?$_GET['p']:1,			// pagina
+		(isset($_GET['texto']))	?$_GET['texto']:null	// texto de busca
+);
 
 ?>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12 prod-result-line">
+		<div class="col-md-6 prod-result-line">
 			<h2>
 			<?php if ($produtos['affected_rows'] > 1) : ?>
 				Foram encontrados <?php echo $produtos['affected_rows'];?> produtos.
@@ -14,6 +19,13 @@ $produtos = $md->getProdutos(isset($_REQUEST['o'])?$_REQUEST['o']:null, (isset($
 			<?php else : ?>
 				Não foi encontrado nenhum produto.
 			<?php endif; ?>
+			</h2>
+		</div>
+		<div class="col-md-3 prod-order-line">
+			<h2>
+			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 1) ? 'active':''; ?>" data-val="1">Nome</button>
+			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 2) ? 'active':''; ?>" data-val="2">Menor Preço</button>
+			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 3) ? 'active':''; ?>" data-val="3">Maior Preço</button>
 			</h2>
 		</div>
 	</div>

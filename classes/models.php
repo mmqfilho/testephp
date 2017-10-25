@@ -25,15 +25,17 @@ class models {
 	 * Pega os produtos
 	 * @param integer $order
 	 * @param string $categoria_id
+	 * @param integer $pag
+	 * @param string $texto
 	 */
-	public function getProdutos($order = 1, $categoria_id = null){
+	public function getProdutos($order = 1, $categoria_id = null, $pag = 1, $texto = null){
 		
 		switch ($order) {
 			case 1:
 				$order = 'p.produto_nome';
 				break;
 			case 2:
-				$order = 'p.produto_preco';
+				$order = 'p.produto_preco ASC';
 				break;
 			case 3:
 				$order = 'p.produto_preco DESC';
@@ -45,15 +47,18 @@ class models {
 		
 		
 		
-		$sql = 'SELECT * FROM produtos p';
+		$sql = 'SELECT DISTINCT * FROM produtos p
+				  JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id) ';		
 		if (!is_null($categoria_id)) {
-			$sql .= ' JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id AND pc.categoria_id = ?)';
-			$data[] = array('i', $categoria_id);
+			$sql .= ' WHERE pc.categoria_id = ' .$categoria_id ;
+			/*  FIXME */
+			//$data[] = array('i', $categoria_id);
 		}
-		$sql .= ' ORDER BY ?';
-		$data[] = array('s', $order);
+		$sql .= ' ORDER BY ' . $order;
+		/*  FIXME */
+		//$data[] = array('s', $order);
 		
 		$key = 'lista_produtos';
-		return $this->db->execute($sql, $key, $data);
+		return $this->db->execute($sql, $key);
 	}
 }

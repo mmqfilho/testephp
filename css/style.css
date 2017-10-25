@@ -178,6 +178,11 @@ div[role="main"] {
 	margin-bottom: 20px;
 }
 
+.prod-order-line {
+	text-align: right;
+	margin-bottom: 20px;
+}
+
 .prod-result-line h2 {
 	font-size: 18px;
 }

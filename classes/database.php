@@ -46,7 +46,7 @@ Class database {
 			$this->conn->set_charset("utf8");
 			
 		} catch (Exception $e) {
-			echo 'Database connection failed: ' .$e->getMessage();
+			trigger_error('Database connection failed: ' . $e->getMessage() , E_USER_ERROR);
 		}
 	}
 	
