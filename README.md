@@ -49,6 +49,40 @@ services apache2 reload
 Importar o arquivo instalacao/database.sql no banco testephp
 Alterar dados de acesso ao banco no arquivo 'config.php'
 
+A tabela produtos usa MyISAM devido a necessidade de busca FULLTEXT, por padrão o mysql habilita o uso mínimo de palavras com 4 ou mais caracteres para pesquisas fulltext. 
+
+(OPCIONAL)
+Caso queira diminuir o mínimo de caracteres necessários na pesquisa fulltext, deve-se atualizar globalmente o banco com a propriedade 'ft_min_word_len = VALOR' no arquivo de configuração do MySql 'my.cnf' e executar a reparação da tabela.
+
+```
+REPAIR TABLE produtos QUICK;
+```
+
+Deve-se também alterar os arquivos config.php de
+```
+define('DB_MIN_FT',		4);
+```
+para
+```
+define('DB_MIN_FT',		NOVO_VALOR);
+```
+
+js/scripts.js de
+```
+if ($('#texto').val().length < 4 ){
+	alert('Utilize palavras com 4 ou mais caracteres!');
+	return;
+}
+```
+para
+```
+if ($('#texto').val().length < NOVO_VALOR ){
+	alert('Utilize palavras com NOVO_VALOR ou mais caracteres!');
+	return;
+}
+```
+
+
 
 # Memcached
 Instalar e habilitar o memcached

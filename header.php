@@ -24,7 +24,8 @@
 				</div>
        			<div class="col-md-6">
        				<form method="GET" action="/" id="frmBuscar" name="frmBuscar" >
-       					<input class="busca" type="text" name="texto" id="texto" placeholder="Pesquise um produto" maxlength="200" value="<?php echo (isset($_REQUEST['texto'])) ? $_REQUEST['texto'] : ''; ?>">
+       					<input type="hidden" name="p" value="1">
+       					<input class="busca" type="text" name="texto" id="texto" placeholder="Pesquise um produto" maxlength="200" value="<?php echo (isset($_GET['texto']) && strlen($_GET['texto'] > DB_MIN_FT)) ? $_GET['texto'] : ''; ?>">
        					<button type="button" class="btn btn-info" id="btnTopoBuscar">
 					      <i class="fa fa-search"></i> Pesquisar
 					    </button>

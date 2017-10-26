@@ -35,6 +35,10 @@ $(document).ready(function(){
 	
 	/*busca topo*/
 	$('#btnTopoBuscar').click(function(){
+		if ($('#texto').val().length < 4 ){
+			alert('Utilize palavras com 4 ou mais caracteres!');
+			return;
+		}
 		$('#frmBuscar').submit();
 	});
 	

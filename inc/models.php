@@ -57,7 +57,7 @@ class models extends databaseMysqli {
 			$sql_total .= 	   ' AND pc.categoria_id = ' .$categoria_id ;
 		}
 		if (!is_null($texto)){
-			$sql_total .= 	   ' AND p.produto_nome LIKE "%' . addslashes($texto) .'%" ';
+			$sql_total .= ' AND MATCH (produto_nome, produto_descricao) AGAINST ("'.addslashes($texto).'") ';
 		}
          $sql_total .=	'      GROUP BY p.produto_id) t';
 		
@@ -86,7 +86,7 @@ class models extends databaseMysqli {
 			$sql .= ' AND pc.categoria_id = ' .$categoria_id ;
 		}
 		if (!is_null($texto)){
-			$sql .= ' AND p.produto_nome LIKE "%' . addslashes($texto) .'%" ';
+			$sql .= ' AND MATCH (produto_nome, produto_descricao) AGAINST ("'.addslashes($texto).'") ';
 		}
 		$sql .= ' ORDER BY ' . $order;
 		$sql .= ' LIMIT ' . $inicio . ', ' . PAGINA_QTD;

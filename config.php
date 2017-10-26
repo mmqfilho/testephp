@@ -16,6 +16,7 @@ define('DB_HOST', 		'localhost');
 define('DB_DATABASE', 	'testephp');
 define('DB_USERNAME', 	'root');
 define('DB_PASSWORD', 	'advance');
+define('DB_MIN_FT',		4);
 
 // memcached
 define('MEMCACHED',				false);
