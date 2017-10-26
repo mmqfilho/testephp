@@ -26,6 +26,8 @@ Class database {
 		}
 		
 		$this->connect();
+		
+		return $this;
 	}
 	
 	/**

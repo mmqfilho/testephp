@@ -1,17 +1,14 @@
 <?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+/**
+ * Chama as configurações e demais arquivos de CORE do sistema
+ */
 require_once 'config.php';
-require_once 'autoloader.php';
 
-
-$db = new database();
-$md = new models($db);
-
-?>
-<?php require 'header.php'; ?>
+/**
+ * TEMPLATE
+ */
+require 'header.php'; 
+ ?>
 		
 			<div class="row">
 				<div class="menu-container col-md-2">

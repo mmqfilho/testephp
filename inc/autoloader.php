@@ -6,7 +6,7 @@
  */
 function __autoload($class_name) {
 
-	if (file_exists(CLASS_DIR . DS . $class_name . '.php'))
-		include_once CLASS_DIR . DS . $class_name . '.php';
+	if (file_exists(INC_DIR . DS . $class_name . '.php'))
+		include_once INC_DIR . DS . $class_name . '.php';
 
 }

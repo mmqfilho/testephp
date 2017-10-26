@@ -1,20 +1,25 @@
 <?php 
+// marca ordenacao padrao como menor preco
+if (!isset($_GET['o'])) $_GET['o'] = ORDENACAO_DEFAULT;
+
+// pagina 1 como padrao
+if (!isset($_GET['p'])) $_GET['p'] = 1;
+
 // pega os produtos
 $produtos = $md->getProdutos(
-		(isset($_GET['o']))  	?$_GET['o']:null, 		// ordenacao
-		(isset($_GET['cat']))	?$_GET['cat']:null,		// categoria
-		(isset($_GET['p']))		?$_GET['p']:1,			// pagina
-		(isset($_GET['texto']))	?$_GET['texto']:null	// texto de busca
+		(isset($_GET['o']))  	?$_GET['o']:ORDENACAO_DEFAULT, 	// ordenacao
+		(isset($_GET['cat']))	?$_GET['cat']:null,				// categoria
+		(isset($_GET['p']))		?$_GET['p']:1,					// pagina
+		(isset($_GET['texto']))	?$_GET['texto']:null			// texto de busca
 );
-
 ?>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 prod-result-line">
 			<h2>
-			<?php if ($produtos['affected_rows'] > 1) : ?>
-				Foram encontrados <?php echo $produtos['affected_rows'];?> produtos.
-			<?php elseif ($produtos['affected_rows'] == 1) : ?>
+			<?php if ($produtos['total_produtos'] > 1) : ?>
+				Foram encontrados <?php echo $produtos['total_produtos'];?> produtos. Página <?php echo $produtos['pagina_atual'] . ' de ' . $produtos['total_paginas']; ?>
+			<?php elseif ($produtos['total_produtos'] == 1) : ?>
 				Foi encontrado 1 produto.
 			<?php else : ?>
 				Não foi encontrado nenhum produto.
@@ -23,9 +28,9 @@ $produtos = $md->getProdutos(
 		</div>
 		<div class="col-md-3 prod-order-line">
 			<h2>
-			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 1) ? 'active':''; ?>" data-val="1">Nome</button>
-			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 2) ? 'active':''; ?>" data-val="2">Menor Preço</button>
-			<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 3) ? 'active':''; ?>" data-val="3">Maior Preço</button>
+				<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 1) ? 'active':''; ?>" data-val="1">Nome</button>
+				<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 2) ? 'active':''; ?>" data-val="2">Menor Preço</button>
+				<button type="button" class="btnOrder btn btn-sm btn-default <?php echo (isset($_GET['o']) && $_GET['o'] == 3) ? 'active':''; ?>" data-val="3">Maior Preço</button>
 			</h2>
 		</div>
 	</div>
