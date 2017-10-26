@@ -1,21 +1,8 @@
 			<footer class="row">
-				<div class="col-md-3">col1</div>
-       			<div class="col-md-3">
-       			<p>Formas de Pagamento</p>
-				<ul>
-					<li>Cartões de crédito</li>
-						<ul>
-							<li>Visa</li>
-							<li>MasterCard</li>
-							<li>Diners Club</li>
-							<li>American Express</li>
-						</ul>
-					<li>Boleto bancário</li>
-					<li>Débito Online</li>
-				</ul>
-       			</div>
-       			<div class="col-md-3">col3</div>
-       			<div class="col-md-3">col4</div>
+				<div class="col-md-3">&nbsp;</div>
+       			<div class="col-md-3">&nbsp;</div>
+       			<div class="col-md-3">&nbsp;</div>
+       			<div class="col-md-3">&nbsp;</div>
 			</footer>
 		</div>
 		

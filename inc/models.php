@@ -102,4 +102,27 @@ class models extends databaseMysqli {
 		
 		return $ret;
 	}
+	
+	/**
+	 * Retorna dados de um produto
+	 * @param integer $id
+	 */
+	public function getProduto($id) {
+		
+		$sql_produto = 
+			'SELECT p.produto_id, p.produto_nome, p.produto_descricao, p.produto_imagem, p.produto_preco
+			   FROM produtos p';
+		
+		$key = 'detalhe_produto';
+		$ret = $this->execute($sql, $key);
+		
+		$sql_caracteristicas = 
+			'SELECT pc.*, c.caracteristica_nome
+ 			   FROM produtos_caracteristicas pc
+ 			   JOIN caracteristicas c ON (c.caracteristica_id = pc.caracteristica_id)
+ 			  WHERE pc.produto_id = 1';
+		
+		$key = 'detalhe_produto_caracteristica';
+		$ret = $this->execute($sql, $key);
+	}
 }

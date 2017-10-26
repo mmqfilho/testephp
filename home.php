@@ -35,8 +35,8 @@ $produtos = $md->getProdutos(
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
 
+<div class="container-fluid">
 <?php foreach ($produtos["result"] as $p): ?>
 	<a href="?g=detalhes&id=<?php echo $p['produto_id']; ?>">
 		<div class="col-md-3 container-product">
@@ -46,5 +46,15 @@ $produtos = $md->getProdutos(
 		</div>
 	</a>
 <?php endforeach; ?>	
-	
 </div>
+
+<?php 
+// paginacao
+if ($produtos['total_paginas'] > 1) { 
+?>
+	<div class="container-fluid">
+		<div class="col-md-1"></div>
+		<div class="col-md-8"><?php include_once 'paginacao.php'; ?></div>
+	</div>
+<?php
+}

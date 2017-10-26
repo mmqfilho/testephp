@@ -31,8 +31,6 @@ function replaceParams(url, params){
 	return resultUrl;
 }
 
-
-
 $(document).ready(function(){
 	
 	/*busca topo*/
@@ -43,6 +41,11 @@ $(document).ready(function(){
 	/*ordenacao produtos*/
 	$('.btnOrder ').click(function(){
 		setUrlParams({o:$(this).attr('data-val'), p:1});
+	});
+	
+	/*paginacao*/
+	$('a.paginator').click(function(){
+		setUrlParams({p:$(this).attr('data-page')});
 	});
 	
 });
