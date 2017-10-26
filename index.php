@@ -1,4 +1,5 @@
 <?php 
+session_start();
 /**
  * Chama as configurações e demais arquivos de CORE do sistema
  */

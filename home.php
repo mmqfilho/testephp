@@ -10,8 +10,9 @@ $produtos = $md->getProdutos(
 		(isset($_GET['o']))  	?$_GET['o']:ORDENACAO_DEFAULT, 	// ordenacao
 		(isset($_GET['cat']))	?$_GET['cat']:null,				// categoria
 		(isset($_GET['p']))		?$_GET['p']:1,					// pagina
-		(isset($_GET['texto']) && strlen($_GET['texto'] > DB_MIN_FT))?$_GET['texto']:null	// texto de busca (padrao fulltext mysql de 4 ou mais caracteres)
+		(isset($_GET['texto']) && strlen($_GET['texto']) >= DB_MIN_FT)?$_GET['texto']:null	// texto de busca (padrao fulltext mysql de 4 ou mais caracteres)
 );
+
 ?>
 <div class="container-fluid">
 	<div class="row">

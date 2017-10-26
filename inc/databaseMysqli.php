@@ -131,14 +131,16 @@ Class databaseMysqli implements databaseInterface  {
 			
 			if($result === false) {
 				trigger_error('Query error: ' . $sql . ' Error: ' . $this->conn->error, E_USER_ERROR);
+				
 			} else {
 				$dados['query']				= $sql;
 				$dados['last_inserted_id'] 	= $this->conn->insert_id;
 				$dados['affected_rows'] 	= $this->conn->affected_rows;
+				$dados['num_rows']			= (isset($result->num_rows))?$result->num_rows:0;
 				$dados['cache']				= false;
 				$dados['result']			= array();
-					
-				if (!$dados['last_inserted_id'] && $dados['affected_rows'] > 0){
+
+				if (isset($result->num_rows) && $result->num_rows > 0){
 					while ($line = $result->fetch_assoc()) {
 						$dados['result'][] = $line;
 					}
@@ -151,5 +153,21 @@ Class databaseMysqli implements databaseInterface  {
 		}
 		
 		return $dados;
+	}
+
+	public function setAutocommit($valor){
+		$this->conn->autocommit($valor);
+	}
+	
+	public function beginTrans(){
+		$this->conn->begin_transaction();
+	}
+	
+	public function commitTrans(){
+		$this->conn->commit();
+	}
+	
+	public function rollbackTrans(){
+		$this->conn->rollback();
 	}
 }

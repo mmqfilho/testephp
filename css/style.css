@@ -56,6 +56,10 @@ div[role="main"] {
 	width: 80%;
 }
 
+.ico-topo a {
+	margin-right: 10px;
+}
+
 /* MENU */
 .nav-side-menu {
   overflow: auto;
@@ -221,7 +225,11 @@ a:hover .container-product  {
 	border: 1px solid #5bc0de;
 }
 
+.container-formulario {
+    text-align: left;
+}
 
-
-
+.nav.nav-tabs {
+	margin-bottom: 10px;
+}
 

@@ -47,6 +47,7 @@ services apache2 reload
 
 # Banco de dados
 Importar o arquivo instalacao/database.sql no banco testephp
+
 Alterar dados de acesso ao banco no arquivo 'config.php'
 
 A tabela produtos usa MyISAM devido a necessidade de busca FULLTEXT, por padrão o mysql habilita o uso mínimo de palavras com 4 ou mais caracteres para pesquisas fulltext. 

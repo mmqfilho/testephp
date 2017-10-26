@@ -17,24 +17,67 @@
 	</head>
 	
 	<body>
-		<div class="container-fluid">
-			<header class="row">
-				<div class="col-md-2">
-					<!-- <img alt="teste php mobly" src="images/logo-mobly4.svg" width="120">  -->
-				</div>
-       			<div class="col-md-6">
-       				<form method="GET" action="/" id="frmBuscar" name="frmBuscar" >
-       					<input type="hidden" name="p" value="1">
-       					<input class="busca" type="text" name="texto" id="texto" placeholder="Pesquise um produto" maxlength="200" value="<?php echo (isset($_GET['texto']) && strlen($_GET['texto'] > DB_MIN_FT)) ? $_GET['texto'] : ''; ?>">
-       					<button type="button" class="btn btn-info" id="btnTopoBuscar">
-					      <i class="fa fa-search"></i> Pesquisar
-					    </button>
-       				</form>
-       			</div>
-       			<div class="col-md-4">
-       				<i class="fa fa-shopping-cart fa-2x"></i>
-       				<i class="fa fa-user fa-2x"></i>
-       				<i class="fa fa-user-times fa-2x"></i>
-       				
-       			</div>
-			</header>
+	
+	<!-- Modal Login -->
+	<div id="divModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		    	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        	<h4 class="modal-title">Login</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	
+		        	<form name="frmModal" id="frmModal" method="post" action="javascript:void(0);">
+  						<div class="form-group">
+    						<label for="modalEmail">Email:</label>
+    						<input type="email" class="form-control" id="modalEmail" name="modalEmail">
+  						</div>
+  						
+  						<div class="form-group">
+    						<label for="modalSenha">Senha:</label>
+    						<input type="password" class="form-control" id="modalSenha" name="modalSenha">
+  						</div>
+  						
+  						<div class="checkbox">
+    						<label><a href="?g=user">Criar novo cadastro</a></label>
+  						</div>
+  						<button type="submit" class="btn btn-default" id="btnModal">Logar</button>
+					</form>
+					
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btnModalLogin btn btn-default" data-dismiss="modal">Fechar</button>
+		      	</div>
+		    </div>
+		</div>
+	</div>
+
+	
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-md-2">
+				<!-- <img alt="teste php mobly" src="images/logo-mobly4.svg" width="120">  -->
+			</div>
+       		
+       		<div class="col-md-6">
+       			<form method="GET" action="/" id="frmBuscar" name="frmBuscar" >
+       				<input type="hidden" name="p" value="1">
+       				<input class="busca" type="text" name="texto" id="texto" placeholder="Pesquise um produto" maxlength="200" value="<?php echo (isset($_GET['texto']) && strlen($_GET['texto']) >= DB_MIN_FT) ? $_GET['texto'] : ''; ?>">
+       				<button type="button" class="btn btn-info" id="btnTopoBuscar">
+						<i class="fa fa-search"></i> Pesquisar
+				    </button>
+       			</form>
+       		</div>
+       		
+       		<div class="col-md-4 ico-topo">
+       			<a href="javascript:void(0);"><i class="fa fa-shopping-cart fa-2x"></i></a>
+       			<?php if (!isset($_SESSION['user_id'])) : ?>
+       			<a href="javascript:void(0);" data-toggle="modal" data-target="#divModal" alt="Logar"><i class="fa fa-user fa-2x"></i></a>
+       			<?php else :?>
+       			<a href="?g=logout&token=<?php echo md5(session_id()); ?>" data-toggle="modal" data-target="#divModal" alt="Deslogar"><i class="fa fa-user-times fa-2x"></i></a>
+       			<?php endif;?>	
+       		</div>
+       		
+		</header>
