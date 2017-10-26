@@ -2,7 +2,7 @@
 /**
  * Classe para acesso ao banco de dados
  */
-Class database {
+Class databaseMysqli implements databaseInterface  {
 	
 	private $conn;
 	private $host;

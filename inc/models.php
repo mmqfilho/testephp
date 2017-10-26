@@ -2,7 +2,7 @@
 /**
  * Armazena todas as querys do sistema
  */
-class models extends database {
+class models extends databaseMysqli {
 	
 	public function __construct(){
 		parent::__construct();
@@ -51,9 +51,13 @@ class models extends database {
 		$sql_total = 'SELECT COUNT(1) AS total 
   						FROM (SELECT p.produto_id, COUNT(1)
           						FROM produtos p 
-          						JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id)';
+          						JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id) 
+				               WHERE 1=1 ';
 		if (!is_null($categoria_id)) {
-			$sql_total .= '    WHERE pc.categoria_id = ' .$categoria_id ;
+			$sql_total .= 	   ' AND pc.categoria_id = ' .$categoria_id ;
+		}
+		if (!is_null($texto)){
+			$sql_total .= 	   ' AND p.produto_nome LIKE "%' . addslashes($texto) .'%" ';
 		}
          $sql_total .=	'      GROUP BY p.produto_id) t';
 		
@@ -76,9 +80,13 @@ class models extends database {
 		
 		$sql = 'SELECT DISTINCT p.produto_id, p.produto_nome, p.produto_descricao, p.produto_imagem, p.produto_preco 
 				  FROM produtos p
-				  JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id) ';		
+				  JOIN produtos_categorias pc ON (pc.produto_id = p.produto_id)
+				 WHERE 1=1 ';		
 		if (!is_null($categoria_id)) {
-			$sql .= ' WHERE pc.categoria_id = ' .$categoria_id ;
+			$sql .= ' AND pc.categoria_id = ' .$categoria_id ;
+		}
+		if (!is_null($texto)){
+			$sql .= ' AND p.produto_nome LIKE "%' . addslashes($texto) .'%" ';
 		}
 		$sql .= ' ORDER BY ' . $order;
 		$sql .= ' LIMIT ' . $inicio . ', ' . PAGINA_QTD;

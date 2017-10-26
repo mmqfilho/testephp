@@ -14,15 +14,12 @@
 	        	<?php 
 	        	$categorias = $md->getCategorias();
 	        	foreach ($categorias['result'] as $c) {
-					?><li class="<?php echo (isset($_GET['cat'])&& $_GET['cat']==$c['categoria_id'])?'active':''; ?>"><a href="?cat=<?php echo $c['categoria_id']; ?>"><?php echo ucfirst($c['categoria_nome']); ?></a></li><?php
+					?><li class="<?php echo (isset($_GET['cat']) && $_GET['cat'] == $c['categoria_id']) ? 'active' : ''; ?>"><a href="?cat=<?php echo $c['categoria_id']; ?>"><?php echo ucfirst($c['categoria_nome']); ?></a></li><?php
 				}
 	        	?>
 	        </ul>
+	        
+	        
 		</ul>
 	</div>
 </div>
-
-<script>
-
-
-</script>
