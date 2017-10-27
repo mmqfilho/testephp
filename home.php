@@ -41,7 +41,7 @@ $produtos = $md->getProdutos(
 <?php foreach ($produtos["result"] as $p): ?>
 	<a href="?g=detalhes&id=<?php echo $p['produto_id']; ?>">
 		<div class="col-md-3 container-product">
-			<img itemprop="image" alt="" width="200" height="200" src="<?php echo IMG_PROD_DIR; ?>/<?php echo $p['produto_imagem']?>" onerror="this.src='<?php echo IMG_PROD_DIR; ?>/produtoSemFoto.jpg'">
+			<img itemprop="image" width="200" height="200" src="<?php echo IMG_PROD_DIR; ?>/<?php echo $p['produto_imagem']?>" onerror="this.src='<?php echo IMG_PROD_DIR; ?>/produtoSemFoto.jpg'">
 			<h1><?php echo $p['produto_nome']?></h1>
 			<h3>R$<?php echo number_format($p['produto_preco'], 2, ',', '.')?></h3>
 		</div>

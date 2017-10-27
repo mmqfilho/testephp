@@ -33,7 +33,7 @@ function replaceParams(url, params){
 
 function login(user, pass){
 	$.ajax({
-        url: 'login.php',
+        url: 'http://testephp.local/login.php',
         method: "POST",
         data: {'user': user, 'pass': pass}
     })

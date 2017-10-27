@@ -74,9 +74,9 @@
        		<div class="col-md-4 ico-topo">
        			<a href="javascript:void(0);"><i class="fa fa-shopping-cart fa-2x"></i></a>
        			<?php if (!isset($_SESSION['user_id'])) : ?>
-       			<a href="javascript:void(0);" data-toggle="modal" data-target="#divModal" alt="Logar"><i class="fa fa-user fa-2x"></i></a>
+       			<a href="javascript:void(0);" data-toggle="modal" data-target="#divModal" data-toggle="tooltip" title="Logar"><i class="fa fa-user fa-2x"></i></a>
        			<?php else :?>
-       			<a href="?g=logout&token=<?php echo md5(session_id()); ?>" data-toggle="modal" data-target="#divModal" alt="Deslogar"><i class="fa fa-user-times fa-2x"></i></a>
+       			<a href="?g=logout&token=<?php echo md5(session_id()); ?>" data-toggle="modal" data-target="#divModal" data-toggle="tooltip" title="Deslogar"><i class="fa fa-user-times fa-2x"></i></a>
        			<?php endif;?>	
        		</div>
        		
