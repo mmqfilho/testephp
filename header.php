@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  id="bootstrap-css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<link href="<?php echo CSS_DIR ?>/style.css" rel="stylesheet">
+		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="<?php echo JS_DIR ?>/jquery.cookie.min.js"></script>
 		
 		<!--[if lt IE 9]>
     	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -74,7 +76,7 @@
        		</div>
        		
        		<div class="col-md-4 ico-topo">
-       			<a href="javascript:void(0);"><i class="fa fa-shopping-cart fa-2x"></i></a>
+       			<a href="?g=cart"><i class="fa fa-shopping-cart fa-2x"></i></a>
        			<?php if (!isset($_SESSION['user_id'])) : ?>
        			<a href="javascript:void(0);" class="loginShow" data-toggle="tooltip" title="Logar"><i class="fa fa-user fa-2x"></i></a>
        			<?php else :?>

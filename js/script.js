@@ -79,21 +79,23 @@ $(document).ready(function(){
 			return;
 		}
 		
-		if ( $('#senha').val() == '' ) {
-			$('.lg').click();
-			alert('Preencha a sua senha');
-			('#senha').focus();
-			return;
+		if ( $('#user_id').val() == '') {
+			if ( $('#senha').val() == '' ) {
+				$('.lg').click();
+				alert('Preencha a sua senha');
+				('#senha').focus();
+				return;
+			}
+			
+			if ( $('#senha2').val() == '' ) {
+				$('.lg').click();
+				alert('Preencha a confirmação da sua senha');
+				('#senha2').focus();
+				return;
+			}
 		}
 		
-		if ( $('#senha2').val() == '' ) {
-			$('.lg').click();
-			alert('Preencha a confirmação da sua senha');
-			('#senha2').focus();
-			return;
-		}
-		
-		if ( $('#senha2').val() != $('#senha').val() ) {
+		if ( $('#senha').val() != '' &&  $('#senha2').val() != '' && $('#senha2').val() != $('#senha').val() ) {
 			$('.lg').click();
 			alert('A senha não confere');
 			('#senha2').focus();
@@ -172,4 +174,58 @@ $(document).ready(function(){
 		$('#modalEmail').focus();
 	})
 	
+	/* detalhes*/
+	$('.shop-cart-add').click(function(){
+		p = $.cookie('produtos');
+		if (p == undefined) {
+			p = "";
+		}
+
+		p += $(this).attr('data-id')+':1;';
+		$.cookie('produtos', p);
+		
+		document.location.href="//testephp.local/?g=cart";
+	});
+	
+	/* carrinho */
+	$('.finalizar-compra').click(function(){
+		
+		if ($.cookie('user_id')) {
+			document.location.href="//testephp.local/?g=finaliza";
+		}else{
+			alert('Faça o login para finalizar sua compra!');
+			$('#divLoginModal').modal('show');
+		}
+	});
+	
+	// altera quantidades do cookie de carrinho
+	$('.cart-qtd').click(function(){
+		id = $(this).attr('data-id');
+		qtd = $(this).parent().find('.prod-qtd').val();
+		
+		p = $.cookie('produtos');
+		
+		p = p.split(';');
+		
+		novo_cookie_val = '';
+		$.each(p, function(i,item){
+			if (item != ''){
+				p2 = item.split(':');
+				console.log(p2);
+				
+				if (p2[0] == id){
+					p2[1] = qtd;
+				}
+				
+				novo_cookie_val += p2[0]+':'+p2[1]+';';
+			}
+		});
+		
+		$.cookie('produtos', novo_cookie_val);
+		document.location.href="//testephp.local/?g=cart";
+		
+	});
+	
 });
+
+

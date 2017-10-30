@@ -22,8 +22,28 @@ if (!isset($_SESSION['user_id']) && isset($_POST['email'])){
 // se ta logado só faz update
 }elseif(isset($_SESSION['user_id']) && isset($_POST['email'])){
 	// pega dados do usuario
+	$cad = $md->setUsuario($_POST);
+	if ($cad === true){
+		$ok = true;
+		$okMsg = "Alteração efetuado com sucesso!";
+	}else{
+		$erro = true;
+		$erroMsg = "Um erro ocorreu, tente novamente mais tarde! : (".$cad.")";
+	}
 }
 
+// pega dados do usuario
+if (isset($_SESSION['user_id']) && !isset($_POST['email'])){
+	$c = $md->getUsuario();
+	
+	// joga dados no post
+	$_POST['email']=$c['user']['cliente_email'];
+	$_POST['logradouro']=$c['endereco']['endereco_logradouro'];
+	$_POST['numero']=$c['endereco']['endereco_numero'];
+	$_POST['bairro']=$c['endereco']['endereco_bairro'];
+	$_POST['cep']=$c['endereco']['endereco_cep'];
+	
+}
 ?>
 <div class="container-fluid">
 	<div class="row container-formulario">
@@ -102,7 +122,7 @@ if (!isset($_SESSION['user_id']) && isset($_POST['email'])){
 			  
 			  	<div class="form-group"> 
 			    	<div class="col-sm-offset-2 col-sm-10">
-			      		<button name="btnNew" id="btnNew" type="submit" class="btn btn-default">Enviar</button>
+			      		<button name="btnNew" id="btnNew" type="submit" class="btn btn-default"><?php echo (isset($_SESSION['user_id'])) ? 'Alterar' : 'Cadastrar'; ?></button>
 			    	</div>
 			  	</div>
 			</form>

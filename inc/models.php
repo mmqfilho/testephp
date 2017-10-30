@@ -130,6 +130,11 @@ class models extends databaseMysqli {
 		
 	}
 	
+	/**
+	 * Verifica se email já foi utilizado
+	 * @param string $email
+	 * @return boolean
+	 */
 	public function verificaEmail($email){
 		$sql = "SELECT COUNT(1) as total FROM clientes WHERE cliente_email = '{$email}'";
 		$key = 'email_existe';
@@ -137,6 +142,12 @@ class models extends databaseMysqli {
 		return ($ret['result'][0]['total'] > 0) ? true : false;
 	}
 	
+	/**
+	 * Faz login
+	 * @param string $user
+	 * @param string $pass
+	 * @return boolean
+	 */
 	public function login($user, $pass){
 		$sql = 'SELECT cliente_id 
 				  FROM clientes 
@@ -150,14 +161,57 @@ class models extends databaseMysqli {
 		}
 	}
 	
-	public function getUsuario($id){
-		//$sql_user
-		//$sql_endereco
+	/**
+	 * pega dados do cliente
+	 */
+	public function getUsuario(){
+		$sql_user = "SELECT cliente_id, cliente_email FROM clientes WHERE cliente_id = " . $_SESSION['user_id'];
+		$ret_user = $this->execute($sql_user);
+		
+		if (isset($ret_user['result'][0]['cliente_id'])) {
+			$sql_endereco = "SELECT * FROM clientes_endereco WHERE cliente_id = " . $ret_user['result'][0]['cliente_id'];
+			$ret_endereco = $this->execute($sql_endereco);
+		}
+
+		return array('user'=>$ret_user['result'][0], 'endereco'=>$ret_endereco['result'][0]);
+		
 	}
 	
+	/**
+	 * Cadastra ou altera os dados de um cliente
+	 * @param unknown $data
+	 * @throws Exception
+	 * @return boolean
+	 */
 	public function setUsuario($data){
 		// update
 		if (isset($data['user_id']) && $data['user_id'] > 0 ){
+			
+			try {
+				$this->setAutocommit(false);
+				$this->beginTrans();
+				
+				$sql_user = 'UPDATE clientes SET cliente_email = '. $data['email'] . ' WHERE cliente_id = ' . $data['user_id'];
+				$ret = $this->execute($sql_user);
+
+				if (isset($ret['last_inserted_id']) && $ret['last_inserted_id'] > 0){
+					$sql_endereco = 'UPDATE clientes_endereco SET endereco_logradouro, endereco_numero, endereco_bairro, endereco_cep) 
+							VALUES ("'. $ret['last_inserted_id'] .'", "'. $data['logradouro'] .'", "'. $data['numero'] .'", "'. $data['bairro'] .'", "'. $data['cep'] .'")';
+					$ret2 = $this->execute($sql_endereco);
+										
+					$this->commitTrans();
+				}else{
+					throw new Exception('Erro ao recuperar id');
+				}
+				
+				
+			} catch (Exception $e) {
+				$this->rollbackTrans();
+				return $e->getMessage();
+				
+			} finally {
+				$this->setAutocommit(true);
+			}			
 			
 		// insert
 		}else{
@@ -190,5 +244,20 @@ class models extends databaseMysqli {
 			return true;
 			
 		}
+	}
+	
+	/**
+	 * Salva pedido
+	 * 
+	 * @param string $dados
+	 * @return array
+	 */
+	public function savePedido($dados){
+		
+		// no futuro utilizar beanstalk para gravar na fila ao invés do DB
+		$sql = 'INSERT INTO pedidos (cliente_id, pedido_dados, pedido_data) 
+				     VALUES ("'. $_SESSION['user_id'] .'", "'.$dados.'", now())';
+		$ret = $this->execute($sql);
+		return $ret;
 	}
 }

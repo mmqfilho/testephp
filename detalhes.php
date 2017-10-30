@@ -17,7 +17,7 @@ $p = $md->getProduto($_GET['id']);
 		<div class="col-md-8 data">
 			<h1 class="titulo"><?php echo $p['produto']['produto_nome']; ?></h1>
 			<p class="preco">R$ <?php echo number_format($p['produto']['produto_preco'], 2, ',', '.'); ?></p>
-			<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+			<span class="glyphicon glyphicon-shopping-cart shop-cart-add" aria-hidden="true" data-id="<?php echo $p['produto']['produto_id']; ?>" data-price="<?php echo $p['produto']['produto_preco']; ?>"></span>
 		</div>
 	</div>
 	<div class="row descricao">

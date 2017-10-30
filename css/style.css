@@ -269,3 +269,15 @@ div.caracteristicas {
 div.topo div.data span.glyphicon {
 	font-size: 2em;
 }
+
+p.preco_total {
+	font-size: 20px;
+	color: #337ab7;
+	margin-top: 10px;
+}
+
+div.preco_total {
+	font-size: 20px;
+	color: #337ab7;
+	margin-top: 10px;
+}

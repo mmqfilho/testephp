@@ -28,7 +28,7 @@
 	        	<li><a href="?g=user">Novo cadastro</a></li>
 	        	<?php else :?>
 	        	<li><a href="?g=logout&token=<?php echo md5(session_id()); ?>">Deslogar</a></li>
-	        	<li><a href="/">Alterar cadastro</a></li>
+	        	<li><a href="?g=user">Alterar cadastro</a></li>
 	        	<?php endif;?>
 	        </ul>
 	        

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/10/2017 às 17:50
+-- Tempo de geração: 30/10/2017 às 15:44
 -- Versão do servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versão do PHP: 5.6.31-6+ubuntu16.04.1+deb.sury.org+1
 
@@ -115,6 +115,19 @@ INSERT INTO `clientes_endereco` (`cliente_id`, `endereco_logradouro`, `endereco_
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `pedido_id` int(8) NOT NULL,
+  `cliente_id` int(4) NOT NULL,
+  `pedido_dados` text NOT NULL,
+  `pedido_data` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `produtos`
 --
 
@@ -207,7 +220,98 @@ INSERT INTO `produtos_caracteristicas` (`produto_id`, `caracteristica_id`, `cara
 (2, 3, 'preto'),
 (2, 3, 'LED'),
 (2, 8, 'UN32J4300AGXZD'),
-(2, 6, '7kg');
+(2, 6, '7kg'),
+(43, 3, 'preto'),
+(43, 8, 'Auri 3500'),
+(44, 3, 'preto'),
+(44, 8, 'KX-TGC210LBB'),
+(45, 3, 'azul'),
+(45, 8, 'KX-TGC220LBB'),
+(46, 3, 'preto'),
+(46, 8, 'TS40'),
+(47, 3, 'preto'),
+(47, 8, 'MOTO750'),
+(48, 8, 'J5 Prime'),
+(49, 3, 'dourado'),
+(49, 8, 'J5 Prime SM-G570M'),
+(50, 3, 'preto'),
+(50, 8, 'Moto X4 XT1900'),
+(51, 3, 'preto'),
+(51, 8, 'iPhone 7'),
+(52, 3, 'dourado'),
+(52, 8, 'iPhone 7'),
+(53, 3, 'preto'),
+(53, 8, 'Galaxy Tab E SM-T560'),
+(54, 3, 'preto'),
+(54, 8, 'Galaxy Tab A Note SM-P585M'),
+(55, 3, 'preto'),
+(55, 8, 'M7-S NB184'),
+(56, 5, 'bivolt'),
+(56, 3, 'preto'),
+(56, 8, 'LG All In One'),
+(57, 5, 'bivolt'),
+(57, 3, 'preto'),
+(57, 8, 'Inspiron 20 Ione'),
+(58, 5, 'bivolt'),
+(58, 3, 'preto'),
+(58, 8, 'Easypc 5547'),
+(59, 5, 'bivolt'),
+(59, 3, 'preto'),
+(59, 8, 'Aspire F5-573-51LJ'),
+(60, 5, 'bivolt'),
+(60, 3, 'prata'),
+(60, 8, '80YH0006BR'),
+(61, 5, 'bivolt'),
+(61, 3, 'branco'),
+(61, 8, 'Z550MA-XX005T'),
+(62, 5, 'bivolt'),
+(62, 8, 'CJ65'),
+(63, 5, 'bivolt'),
+(63, 8, 'MHC-V7D'),
+(64, 5, 'bivolt'),
+(64, 8, 'X3D'),
+(65, 5, 'bivolt'),
+(65, 8, 'SP141'),
+(66, 5, 'bivolt'),
+(66, 7, 'LED'),
+(66, 8, '43MU6100'),
+(67, 5, 'bivolt'),
+(67, 7, 'LED'),
+(67, 8, '49UJ6565'),
+(68, 5, 'bivolt'),
+(68, 7, 'LED'),
+(68, 8, '28MT49S-PS'),
+(68, 3, 'preto'),
+(69, 5, 'bivolt'),
+(69, 7, 'LED'),
+(69, 8, '43PUG6102/78'),
+(70, 3, 'inox'),
+(70, 5, '110'),
+(70, 8, 'BMJ38AR'),
+(71, 3, 'branco'),
+(71, 5, '110'),
+(71, 8, 'BMS45BBHNA'),
+(72, 3, 'inox'),
+(72, 5, 'bivolt'),
+(72, 8, 'WD10J6410AX'),
+(73, 3, 'branco'),
+(73, 5, '110'),
+(74, 3, 'branco'),
+(74, 9, '4'),
+(75, 3, 'branco'),
+(75, 5, 'bivolt'),
+(75, 11, 'sim'),
+(75, 12, '1'),
+(76, 3, 'inox'),
+(77, 3, 'preto'),
+(77, 8, 'ps3 slim'),
+(78, 3, 'preto'),
+(78, 8, 'ps4'),
+(79, 3, 'preto'),
+(84, 8, 'MVH-88UB'),
+(85, 8, 'NVS3030CR'),
+(86, 8, 'Primacy 3 GRNX'),
+(87, 8, 'AVH-298BT');
 
 -- --------------------------------------------------------
 
@@ -307,6 +411,12 @@ ALTER TABLE `clientes_endereco`
   ADD PRIMARY KEY (`cliente_id`);
 
 --
+-- Índices de tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`pedido_id`);
+
+--
 -- Índices de tabela `produtos`
 --
 ALTER TABLE `produtos`
@@ -341,6 +451,11 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `clientes`
   MODIFY `cliente_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT de tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `pedido_id` int(8) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
