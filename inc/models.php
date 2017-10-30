@@ -191,7 +191,11 @@ class models extends databaseMysqli {
 				$this->setAutocommit(false);
 				$this->beginTrans();
 				
-				$sql_user = 'UPDATE clientes SET cliente_email = "'. $data['email'] . '"  WHERE cliente_id = ' . $data['user_id'];
+				$sql_user = 'UPDATE clientes SET cliente_email = "'. $data['email'] .'" ';
+				if ( isset($data['senha']) && $data['senha'] != '' && isset($data['senha2']) && $data['senha2'] != '' && $data['senha'] == $data['senha2']) {
+					$sql_user .= ', cliente_senha = "'.md5($data['senha']).'" ';
+				}
+				$sql_user .= ' WHERE cliente_id = ' . $data['user_id'];
 				$ret = $this->execute($sql_user);
 
 				$sql_endereco = 'UPDATE clientes_endereco SET 

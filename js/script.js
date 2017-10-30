@@ -95,7 +95,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		if ( $('#senha').val() != '' &&  $('#senha2').val() != '' && $('#senha2').val() != $('#senha').val() ) {
+		if ($('#senha2').val() != $('#senha').val()) {
 			$('.lg').click();
 			alert('A senha não confere');
 			('#senha2').focus();
