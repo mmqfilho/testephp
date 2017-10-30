@@ -191,19 +191,18 @@ class models extends databaseMysqli {
 				$this->setAutocommit(false);
 				$this->beginTrans();
 				
-				$sql_user = 'UPDATE clientes SET cliente_email = '. $data['email'] . ' WHERE cliente_id = ' . $data['user_id'];
+				$sql_user = 'UPDATE clientes SET cliente_email = "'. $data['email'] . '"  WHERE cliente_id = ' . $data['user_id'];
 				$ret = $this->execute($sql_user);
 
-				if (isset($ret['last_inserted_id']) && $ret['last_inserted_id'] > 0){
-					$sql_endereco = 'UPDATE clientes_endereco SET endereco_logradouro, endereco_numero, endereco_bairro, endereco_cep) 
-							VALUES ("'. $ret['last_inserted_id'] .'", "'. $data['logradouro'] .'", "'. $data['numero'] .'", "'. $data['bairro'] .'", "'. $data['cep'] .'")';
-					$ret2 = $this->execute($sql_endereco);
-										
-					$this->commitTrans();
-				}else{
-					throw new Exception('Erro ao recuperar id');
-				}
-				
+				$sql_endereco = 'UPDATE clientes_endereco SET 
+						endereco_logradouro = "'.$data['logradouro'].'", 
+						endereco_numero = "'.$data['numero'].'", 
+						endereco_bairro = "'.$data['bairro'].'", 
+						endereco_cep =  "'.$data['cep'].'"
+						WHERE cliente_id = '. $data['user_id'];
+				$ret2 = $this->execute($sql_endereco);
+									
+				$this->commitTrans();
 				
 			} catch (Exception $e) {
 				$this->rollbackTrans();
@@ -211,7 +210,9 @@ class models extends databaseMysqli {
 				
 			} finally {
 				$this->setAutocommit(true);
-			}			
+			}	
+
+			return true;
 			
 		// insert
 		}else{
