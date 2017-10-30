@@ -24,7 +24,7 @@
 	        <ul class="sub-menu collapse" id="usuario">
 	        
 	        	<?php if (!isset($_SESSION['user_id'])) : ?>
-	        	<li><a href="javascript:void(0);" data-toggle="modal" data-target="#divModal">Logar</a></li>
+	        	<li><a href="javascript:void(0);" class="loginShow">Logar</a></li>
 	        	<li><a href="?g=user">Novo cadastro</a></li>
 	        	<?php else :?>
 	        	<li><a href="?g=logout&token=<?php echo md5(session_id()); ?>">Deslogar</a></li>

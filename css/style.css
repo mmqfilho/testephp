@@ -233,3 +233,39 @@ a:hover .container-product  {
 	margin-bottom: 10px;
 }
 
+/* detalhes */
+div.topo {
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+div.topo div.image {
+	padding: 10px
+}
+
+div.topo div.data {
+	padding: 10px;
+	margin-top: 38px;
+    margin-left: 20px;
+}
+
+h1.titulo {
+	font-size: 24px;
+}
+
+p.preco {
+	font-size: 20px;
+	color: #337ab7;
+}
+
+div.descricao {
+	text-align: left;
+	margin-bottom: 20px;
+}
+div.caracteristicas {
+	text-align: center;
+}
+
+div.topo div.data span.glyphicon {
+	font-size: 2em;
+}

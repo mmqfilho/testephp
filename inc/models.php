@@ -111,19 +111,23 @@ class models extends databaseMysqli {
 		
 		$sql_produto = 
 			'SELECT p.produto_id, p.produto_nome, p.produto_descricao, p.produto_imagem, p.produto_preco
-			   FROM produtos p';
+			   FROM produtos p
+			  WHERE produto_id = '. $id ;
 		
 		$key = 'detalhe_produto';
-		$ret = $this->execute($sql, $key);
+		$ret_produto = $this->execute($sql_produto, $key);
 		
 		$sql_caracteristicas = 
 			'SELECT pc.*, c.caracteristica_nome
  			   FROM produtos_caracteristicas pc
  			   JOIN caracteristicas c ON (c.caracteristica_id = pc.caracteristica_id)
- 			  WHERE pc.produto_id = 1';
+ 			  WHERE pc.produto_id = ' . $id;
 		
 		$key = 'detalhe_produto_caracteristica';
-		$ret = $this->execute($sql, $key);
+		$ret_caract = $this->execute($sql_caracteristicas, $key);
+		
+		return array('produto' => $ret_produto['result'][0], 'caracteristicas' => $ret_caract['result']);
+		
 	}
 	
 	public function verificaEmail($email){

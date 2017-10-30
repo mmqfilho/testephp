@@ -31,23 +31,6 @@ function replaceParams(url, params){
 	return resultUrl;
 }
 
-function login(user, pass){
-	$.ajax({
-        url: 'http://testephp.local/login.php',
-        method: "POST",
-        data: {'user': user, 'pass': pass}
-    })
-    .done(function( response ){
-    	console.log(response);
-    })
-    .error( function (jqXHR, textStatus, errorThrown) {
-    	 console.log("erro :" + textStatus );
-    })
-    .always(function() {
-    	$('#modal').modal('toggle');
-    });
-}
-
 $(document).ready(function(){
 	
 	/*busca topo*/
@@ -149,8 +132,44 @@ $(document).ready(function(){
 	});
 	
 	/* modal login*/
-	$('.btnModalLogin').click(function(e){
+	$('#btnModalLogin').click(function(e){
 		e.preventDefault();
-		login($('#modalEmail').val(), $('#modalSenha').val());
+		
+		$.ajax({
+	        url: 'http://testephp.local/login.php',
+	        method: "POST",
+	        data: {'user': $('#modalEmail').val(), 'pass': $('#modalSenha').val()},
+	        dataType: "json",
+	    })
+	    .done(function( response ){
+	    	
+	    	console.log(response.retorno);
+	    	
+	    	if (response.retorno == false) {
+	    		$('#modalMsgError').show();
+	    		$('#modalEmail').val('');
+	    		$('#modalSenha').val('');
+	    	}else{
+	    		$('#divLoginModal').modal('hide');
+	    		location.reload();
+	    	}
+	    })
+	    .error( function (jqXHR, textStatus, errorThrown) {
+	    	 console.log("erro :" + textStatus );
+	    })
+	    .always(function() {
+	    });
 	});
+	
+	$('.loginShow').click(function(){
+		$('#modalMsgError').hide();
+		$('#divLoginModal').modal('show');
+		
+	});
+	
+	
+	$('#divLoginModal').on('shown.bs.modal', function () {
+		$('#modalEmail').focus();
+	})
+	
 });

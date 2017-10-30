@@ -19,7 +19,7 @@
 	<body>
 	
 	<!-- Modal Login -->
-	<div id="divModal" class="modal fade" role="dialog">
+	<div id="divLoginModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 		    <!-- Modal content-->
 		    <div class="modal-content">
@@ -28,7 +28,10 @@
 		        	<h4 class="modal-title">Login</h4>
 		      	</div>
 		      	<div class="modal-body">
-		        	
+		        	<div class="alert alert-danger" style="display: none" id="modalMsgError">
+  						Email ou senha inválidos!
+					</div>
+					
 		        	<form name="frmModal" id="frmModal" method="post" action="javascript:void(0);">
   						<div class="form-group">
     						<label for="modalEmail">Email:</label>
@@ -43,12 +46,11 @@
   						<div class="checkbox">
     						<label><a href="?g=user">Criar novo cadastro</a></label>
   						</div>
-  						<button type="submit" class="btn btn-default" id="btnModal">Logar</button>
+  						<button type="submit" class="btn btn-default" id="btnModalLogin">Logar</button>
 					</form>
-					
 		      	</div>
 		      	<div class="modal-footer">
-		        	<button type="button" class="btnModalLogin btn btn-default" data-dismiss="modal">Fechar</button>
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 		      	</div>
 		    </div>
 		</div>
@@ -74,9 +76,9 @@
        		<div class="col-md-4 ico-topo">
        			<a href="javascript:void(0);"><i class="fa fa-shopping-cart fa-2x"></i></a>
        			<?php if (!isset($_SESSION['user_id'])) : ?>
-       			<a href="javascript:void(0);" data-toggle="modal" data-target="#divModal" data-toggle="tooltip" title="Logar"><i class="fa fa-user fa-2x"></i></a>
+       			<a href="javascript:void(0);" class="loginShow" data-toggle="tooltip" title="Logar"><i class="fa fa-user fa-2x"></i></a>
        			<?php else :?>
-       			<a href="?g=logout&token=<?php echo md5(session_id()); ?>" data-toggle="modal" data-target="#divModal" data-toggle="tooltip" title="Deslogar"><i class="fa fa-user-times fa-2x"></i></a>
+       			<a href="?g=logout&token=<?php echo md5(session_id()); ?>" data-toggle="tooltip" title="Deslogar"><i class="fa fa-user-times fa-2x"></i></a>
        			<?php endif;?>	
        		</div>
        		
