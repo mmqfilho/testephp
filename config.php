@@ -19,7 +19,7 @@ define('DB_PASSWORD', 	'advance');
 define('DB_MIN_FT',		4);
 
 // memcached
-define('MEMCACHED',				false);
+define('MEMCACHED',				true);
 define('MEMCACHED_EXPIRATION',	time() + 600); // 10 minutos
 
 // produtos
