@@ -22,7 +22,7 @@ Class databaseMysqli implements databaseInterface  {
 		
 		if (MEMCACHED) {
 			$this->cache = new Memcached();
-			$this->cache->addServer('localhost', 11211);
+			$this->cache->addServer(MEMCACHED_HOST, MEMCACHED_PORT);
 		}
 		
 		$this->connect();

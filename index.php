@@ -1,9 +1,14 @@
 <?php 
 session_start();
 /**
- * Chama as configurações e demais arquivos de CORE do sistema
+ * Inicializa as configurações
  */
 require_once 'config.php';
+
+/**
+ * Inicializador do CORE do sistema
+ */
+require_once INC_DIR . DS . 'init.php';
 
 /**
  * TEMPLATE

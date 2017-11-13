@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * DEPRECATED com a inclusão do composer
+ * 
  * Loader para carregar as classes
  * @param string $class_name
  */

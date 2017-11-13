@@ -14,14 +14,20 @@ if (MEMCACHED && !extension_loaded('Memcached')) {
 }
 
 /**
- * Autoloader de classes do projeto
+ * Autoloader do composer e de classes do projeto
  */
-require_once 'autoloader.php';
+require_once VENDOR_DIR . DS . 'autoload.php';
+
+/**
+ * DEPRECATED com a inclusão do composer
+ * Autoloader de classes do projeto 
+ */
+//require_once 'autoloader.php';
 
 /**
  * Funções em geral
  */
-require_once 'functions.php';
+require_once INC_DIR . DS . 'functions.php';
 
 /**
  * Cria obj de querys de dados

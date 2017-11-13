@@ -1,4 +1,6 @@
 <?php
+use Pheanstalk\Pheanstalk;
+
 /**
  * Armazena todas as querys do sistema
  */
@@ -259,10 +261,19 @@ class models extends databaseMysqli {
 	 */
 	public function savePedido($dados){
 		
-		// no futuro utilizar beanstalk para gravar na fila ao invés do DB
-		$sql = 'INSERT INTO pedidos (cliente_id, pedido_dados, pedido_data) 
-				     VALUES ("'. $_SESSION['user_id'] .'", "'.$dados.'", now())';
-		$ret = $this->execute($sql);
-		return $ret;
+		// grava na fila
+		if (BEANSTALKD) {
+			$queue = new Pheanstalk_Pheanstalk(BEANSTALKD_HOST . ":" . BEANSTALKD_PORT);
+			
+			$job = array("action" => "pedido", "data" => $dados);
+			$queue->useTube('pedidotube')->put(json_encode($job));
+		
+		// grava direto no banco
+		}else {
+			$sql = 'INSERT INTO pedidos (cliente_id, pedido_dados, pedido_data) 
+					     VALUES ("'. $_SESSION['user_id'] .'", "'.$dados.'", now())';
+			$ret = $this->execute($sql);
+			return $ret;
+		}
 	}
 }
