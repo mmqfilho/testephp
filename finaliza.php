@@ -33,7 +33,9 @@ if (isset($_SESSION['user_id']) && isset($_COOKIE["produtos"]) && $_COOKIE["prod
 		
 		<div class="row">
 			<div class="col-md-12">
+				<?php if ($pedido_id > 0) :?>
 				<div>O ID de seu pedido é <?php echo $pedido_id; ?></div>
+				<?php endif; ?>
 				<div>O valor total de sua compra é: R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></div>
 			</div>
 		</div>

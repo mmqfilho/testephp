@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once INC_DIR . DS . 'init.php';
 
 $ret = $md->login($_POST['user'], $_POST['pass']);
 if ($ret !== false){

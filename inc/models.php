@@ -257,15 +257,16 @@ class models extends databaseMysqli {
 	 * Salva pedido
 	 * 
 	 * @param string $dados
+	 * @param boolean $cron - indica se o método foi chamado pelo cron
 	 * @return array
 	 */
-	public function savePedido($dados){
+	public function savePedido($dados, $cron = FALSE){
 		
 		// grava na fila
-		if (BEANSTALKD) {
+		if (BEANSTALKD && $cron == FALSE) {
 			$queue = new Pheanstalk_Pheanstalk(BEANSTALKD_HOST . ":" . BEANSTALKD_PORT);
 			
-			$job = array("action" => "pedido", "data" => $dados);
+			$job = array("action" => "pedido", "user_id" => $_SESSION['user_id'], "data" => $dados);
 			$queue->useTube('pedidotube')->put(json_encode($job));
 		
 		// grava direto no banco
